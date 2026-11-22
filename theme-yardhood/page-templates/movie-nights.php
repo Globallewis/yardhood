@@ -42,6 +42,14 @@ $join   = function_exists( 'yh_join_url' ) ? yh_join_url( get_permalink() ) : wp
 
 	<section class="yh-section yh-plum">
 		<div class="yh-container">
+			<div class="yh-leader-row">
+				<div class="yh-leader-frame"><?php echo yh_film_leader(); // phpcs:ignore ?></div>
+				<div>
+					<?php echo yh_t_kicker( 'At 8 pm Eastern' ); // phpcs:ignore ?>
+					<h2 class="yh-h2">Three, two, one. Press play.</h2>
+					<p class="yh-lede">The room counts down together on screen, then everybody starts the movie at the same moment. Same scene, same laugh, same gasp, wherever you are.</p>
+				</div>
+			</div>
 			<h2 class="yh-h2">How a movie night works</h2>
 			<div class="yh-steps">
 				<div class="yh-step"><span class="yh-step-n">1</span><h3>Bring your own copy</h3><p>Stream it from the service you already have.</p></div>

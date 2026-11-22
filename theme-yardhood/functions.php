@@ -34,6 +34,8 @@ if ( ! function_exists( 'yh_img' ) ) {
 	}
 }
 
+require_once get_stylesheet_directory() . '/parts/film-leader.php';
+
 /** Small helpers for templates. */
 function yh_t_kicker( $text ) {
 	return '<span class="yh-kicker">' . esc_html( $text ) . '</span>';

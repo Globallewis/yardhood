@@ -487,3 +487,10 @@ body.yardhood #buddypress .activity-meta .button{color:var(--yh-plum)!important;
 
 body.yardhood nav#subnav.bp-subnavs ul li.selected a,body.yardhood nav#subnav.bp-subnavs ul li.current a,body.yardhood nav#subnav.bp-subnavs ul li.selected a i,body.yardhood nav#subnav.bp-subnavs ul li.current a i{color:#F6EFE4!important;}
 body.yardhood nav#subnav.bp-subnavs ul li.selected a,body.yardhood nav#subnav.bp-subnavs ul li.current a{background:#3B1E35!important;}
+
+/* Film leader countdown */
+.yh-leader{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#1E0F1B;border:1px solid rgba(199,154,58,.35);box-shadow:0 24px 60px rgba(20,8,18,.35);}
+.yh-leader svg{display:block;width:100%;height:100%;}
+.yh-leader-row{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;margin-bottom:56px;}
+.yh-leader-event{margin:8px 0 24px;}
+@media (max-width:1024px){.yh-leader-row{grid-template-columns:1fr;gap:24px;}}

@@ -37,6 +37,7 @@ while ( have_posts() ) :
 					<?php if ( has_excerpt() ) : ?><p class="yh-lede-dark"><?php echo esc_html( get_the_excerpt() ); ?></p><?php endif; ?>
 					<?php the_content(); ?>
 					<?php if ( in_array( $lane, array( 'movie-night', 'watchalong' ), true ) ) : ?>
+						<div class="yh-leader-frame yh-leader-event"><?php echo yh_film_leader( $start ? 'Countdown starts ' . $start->format( 'g:i a' ) . ' Eastern' : 'Film begins shortly' ); // phpcs:ignore ?></div>
 						<h3>How it works</h3>
 						<ol>
 							<li>RSVP here. You will get the Join button on this page a few minutes before start.</li>
