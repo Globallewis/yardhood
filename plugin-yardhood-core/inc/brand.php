@@ -176,3 +176,105 @@ add_action( 'admin_post_yh_mail_test', function () {
 	$ok = wp_mail( yh_mail_address(), 'Yardhood test email', "This is a test from yardhood.com.\n\nIf you can read this, the site's email is working." );
 	wp_die( 'YH_MAIL ' . ( $ok ? 'sent' : 'failed' ) );
 } );
+
+/* ---------- Email: send through the hello@ mailbox (SMTP) and brand the emails ---------- */
+add_action( 'phpmailer_init', function ( $m ) {
+	$pass = (string) get_option( 'yh_smtp_pass', '' );
+	if ( ! $pass ) {
+		return;
+	}
+	$addr = yh_mail_address();
+	$m->isSMTP();
+	$m->Host       = 'smtp.hostinger.com';
+	$m->Port       = 465;
+	$m->SMTPSecure = 'ssl';
+	$m->SMTPAuth   = true;
+	$m->Username   = $addr;
+	$m->Password   = $pass;
+	$m->setFrom( $addr, 'Yardhood', false );
+	$m->Sender = $addr;
+}, 99 );
+
+function yh_email_shell( $inner ) {
+	$logo = defined( 'YH_URL' ) ? YH_URL . 'assets/img/yh-icon-180.png' : '';
+	return '<!doctype html><html><body style="margin:0;padding:0;background:#F6EFE4;">'
+		. '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F6EFE4;"><tr><td align="center" style="padding:28px 12px;">'
+		. '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#FFFFFF;border-radius:14px;overflow:hidden;">'
+		. '<tr><td align="center" style="background:#3B1E35;padding:26px 24px 20px;">'
+		. ( $logo ? '<img src="' . esc_url( $logo ) . '" width="56" height="56" alt="" style="display:block;border:0;border-radius:12px;margin:0 auto 10px;">' : '' )
+		. '<div style="font-family:Georgia,\'Times New Roman\',serif;font-size:28px;letter-spacing:3px;color:#F6EFE4;">YARDHOOD</div>'
+		. '<div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:3px;color:#E3C57A;margin-top:6px;">THE COMMUNITY CULTURE MAGAZINE</div></td></tr>'
+		. '<tr><td style="padding:30px 32px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#3B1E35;">' . $inner . '</td></tr>'
+		. '<tr><td align="center" style="padding:18px 24px 26px;font-family:Arial,sans-serif;font-size:12px;color:#7A6372;border-top:1px solid #EFE4D2;">Yardhood &middot; <a href="' . esc_url( home_url( '/' ) ) . '" style="color:#9A6E1F;">yardhood.com</a> &middot; Questions? ' . esc_html( yh_mail_address() ) . '</td></tr>'
+		. '</table></td></tr></table></body></html>';
+}
+
+/* Plain WordPress emails (password resets, notices) get the Yardhood look. */
+add_filter( 'wp_mail', function ( $a ) {
+	$h = is_array( $a['headers'] ) ? implode( "\n", $a['headers'] ) : (string) $a['headers'];
+	if ( false !== stripos( $h, 'text/html' ) || false !== stripos( (string) $a['message'], '<html' ) ) {
+		return $a;
+	}
+	$body = make_clickable( nl2br( esc_html( (string) $a['message'] ) ) );
+	$body = preg_replace( '#<a #', '<a style="color:#9A6E1F;font-weight:bold;" ', $body );
+	$a['message'] = yh_email_shell( $body );
+	$extra        = 'Content-Type: text/html; charset=UTF-8';
+	if ( is_array( $a['headers'] ) ) {
+		$a['headers'][] = $extra;
+	} else {
+		$a['headers'] = trim( $a['headers'] . "\n" . $extra );
+	}
+	return $a;
+} );
+
+/* BuddyBoss emails (signup confirmation, notifications): brand colors, once. */
+add_action( 'admin_init', function () {
+	if ( get_option( 'yh_email_look_v1' ) ) {
+		return;
+	}
+	$o = (array) get_option( 'bp_email_options', array() );
+	$o = array_merge( $o, array(
+		'email_bg'          => '#F6EFE4',
+		'header_bg'         => '#3B1E35',
+		'header_text_color' => '#F6EFE4',
+		'header_text_size'  => 30,
+		'body_bg'           => '#FFFFFF',
+		'body_text_color'   => '#3B1E35',
+		'body_text_size'    => 16,
+		'highlight_color'   => '#9A6E1F',
+		'footer_bg'         => '#F6EFE4',
+		'footer_text_color' => '#7A6372',
+		'footer_text_size'  => 12,
+		'footer_text'       => 'Yardhood · The Community Culture Magazine · yardhood.com',
+	) );
+	update_option( 'bp_email_options', $o );
+	update_option( 'yh_email_look_v1', 1 );
+} );
+
+/* Owner page: email sending section. */
+add_action( 'yh_owner_page_sections', function () {
+	$note = '';
+	if ( isset( $_POST['yh_owner_mail'] ) && check_admin_referer( 'yh_owner_mail' ) ) {
+		$p = isset( $_POST['yh_smtp_pass'] ) ? (string) wp_unslash( $_POST['yh_smtp_pass'] ) : '';
+		if ( '' !== $p ) {
+			update_option( 'yh_smtp_pass', $p, false );
+			$err = '';
+			add_action( 'wp_mail_failed', function ( $e ) use ( &$err ) {
+				$err = $e->get_error_message();
+			} );
+			$ok   = wp_mail( yh_mail_address(), 'Yardhood email is connected', "This came through the hello@yardhood.com mailbox.\n\nMembers' emails will now land in the inbox instead of spam." );
+			$note = $ok ? 'Connected. A test email was sent to ' . yh_mail_address() . '.' : 'That password did not work (' . $err . '). Nothing else changed; emails still send the old way.';
+			if ( ! $ok ) {
+				delete_option( 'yh_smtp_pass' );
+			}
+		}
+	}
+	echo '<h2>Email sending</h2>';
+	if ( $note ) {
+		echo '<div class="notice notice-info"><p>' . esc_html( $note ) . '</p></div>';
+	}
+	echo '<p>Status: <strong>' . ( get_option( 'yh_smtp_pass' ) ? 'connected to ' . esc_html( yh_mail_address() ) : 'not connected (emails may land in spam)' ) . '</strong></p>';
+	echo '<form method="post">';
+	wp_nonce_field( 'yh_owner_mail' );
+	echo '<input type="hidden" name="yh_owner_mail" value="1"><p><input type="password" name="yh_smtp_pass" class="regular-text" autocomplete="new-password" placeholder="Password for ' . esc_attr( yh_mail_address() ) . '"></p><p><button class="button button-primary">Connect email</button></p></form>';
+} );

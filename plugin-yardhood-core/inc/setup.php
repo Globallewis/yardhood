@@ -561,6 +561,7 @@ function yh_owner_page() {
 	echo '<form method="post">';
 	wp_nonce_field( 'yh_owner' );
 	echo '<input type="hidden" name="yh_owner" value="key"><p><input type="password" name="yh_key" class="regular-text" autocomplete="off" placeholder="Paste the rk_live_ key here"></p><p><button class="button button-primary">Save key</button></p></form>';
+	do_action( 'yh_owner_page_sections' );
 	echo '</div>';
 }
 

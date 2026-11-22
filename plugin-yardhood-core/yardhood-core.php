@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'YH_VERSION', '1.3.1' );
+define( 'YH_VERSION', '1.3.2' );
 define( 'YH_DIR', plugin_dir_path( __FILE__ ) );
 define( 'YH_URL', plugin_dir_url( __FILE__ ) );
 

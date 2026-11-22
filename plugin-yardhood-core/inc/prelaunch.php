@@ -38,6 +38,10 @@ add_action( 'template_redirect', function () {
 	if ( ! yh_prelaunch_active() || yh_has_preview_pass() ) {
 		return;
 	}
+	// The email confirmation link must always work, even before launch.
+	if ( function_exists( 'bp_is_activation_page' ) && bp_is_activation_page() ) {
+		return;
+	}
 	// Let people reach registration and activation during private testing only with a pass.
 	status_header( 200 );
 	nocache_headers();
@@ -61,7 +65,7 @@ a{color:#E3C57A}
 <h1>YARDHOOD</h1>
 <div class="t">The Community Culture Magazine</div>
 <p>The Winter Issue is being set up. Movie nights, real conversations, and people worth knowing. Come back soon.</p>
-<div class="s"><a href="<?php echo esc_url( wp_login_url() ); ?>">Team sign in</a></div>
+<div class="s"><a href="<?php echo esc_url( wp_login_url() ); ?>">Members: sign in</a></div>
 </div></body></html><?php
 	exit;
 }, 0 );

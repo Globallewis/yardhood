@@ -500,3 +500,9 @@ body.yardhood #buddypress .bp-feedback,body.yardhood .bp-feedback{background:#FF
 body.yardhood #buddypress .bp-feedback p,body.yardhood .bp-feedback p,body.yardhood .bp-feedback a{color:#3B1E35!important;font-size:17px;line-height:1.5;}
 body.yardhood .bp-feedback .bp-icon{background-color:#C79A3A!important;}
 body.yardhood.register #buddypress .register-page,body.yardhood.activation #buddypress{min-height:0!important;}
+
+/* Signup page: logo + wordmark instead of plain site name */
+body.yardhood .register-section-logo{margin:8px 0 6px;text-align:center;}
+body.yardhood .register-section-logo a{display:inline-flex;flex-direction:column;align-items:center;gap:8px;font-size:0!important;color:transparent!important;text-decoration:none;}
+body.yardhood .register-section-logo a::before{content:"";width:52px;height:52px;background:url(../../../plugins/yardhood-core/assets/img/yh-mark-plum.svg) center/contain no-repeat;}
+body.yardhood .register-section-logo a::after{content:"YARDHOOD";font-family:var(--yh-serif);font-size:30px;letter-spacing:.08em;color:#3B1E35;font-weight:700;}
