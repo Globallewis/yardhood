@@ -18,6 +18,11 @@ add_action( 'init', function () {
 }, 1 );
 
 function yh_prelaunch_active() {
+	$at = (int) get_option( 'yh_launch_at', 0 );
+	if ( $at && time() >= $at && get_option( 'yh_prelaunch', 1 ) ) {
+		update_option( 'yh_prelaunch', 0 );
+		delete_option( 'yh_launch_at' );
+	}
 	return (bool) get_option( 'yh_prelaunch', 1 );
 }
 

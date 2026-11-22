@@ -497,3 +497,76 @@ function yh_setup_profile_fields() {
 	}
 	return $out ? $out : array( 'Profile fields already in place.' );
 }
+
+/* ---------- Owner page: left menu > Yardhood (launch + Stripe key) ---------- */
+add_action( 'admin_menu', function () {
+	add_menu_page( 'Yardhood', 'Yardhood', 'manage_options', 'yardhood', 'yh_owner_page', 'dashicons-lightbulb', 2 );
+} );
+
+function yh_owner_page() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	$msg = '';
+	if ( isset( $_POST['yh_owner'] ) && check_admin_referer( 'yh_owner' ) ) {
+		$a = sanitize_key( wp_unslash( $_POST['yh_owner'] ) );
+		if ( 'key' === $a ) {
+			$k = isset( $_POST['yh_key'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['yh_key'] ) ) ) : '';
+			if ( 0 === strpos( $k, 'rk_' ) ) {
+				update_option( 'yh_stripe_restricted_key', $k, false );
+				$test = yh_stripe_get( 'checkout/sessions?limit=1' );
+				$msg  = is_wp_error( $test ) ? 'Key saved, but Stripe said: ' . $test->get_error_message() . ' Check that Checkout Sessions is set to Read.' : 'Stripe key saved and working.';
+			} elseif ( $k ) {
+				$msg = 'Nothing saved. The key should start with rk_live_ (a restricted key).';
+			}
+		} elseif ( 'open_now' === $a ) {
+			update_option( 'yh_prelaunch', 0 );
+			delete_option( 'yh_launch_at' );
+			$msg = 'The site is now public.';
+		} elseif ( 'lock' === $a ) {
+			update_option( 'yh_prelaunch', 1 );
+			$msg = 'The site is private again.';
+		} elseif ( 'cancel_auto' === $a ) {
+			delete_option( 'yh_launch_at' );
+			$msg = 'Automatic opening canceled. The site stays private until you open it.';
+		}
+	}
+	$locked = yh_prelaunch_active();
+	$at     = (int) get_option( 'yh_launch_at', 0 );
+	$form   = function ( $action, $label, $primary = false ) {
+		echo '<form method="post" style="display:inline-block;margin:0 8px 8px 0">';
+		wp_nonce_field( 'yh_owner' );
+		echo '<input type="hidden" name="yh_owner" value="' . esc_attr( $action ) . '"><button class="button' . ( $primary ? ' button-primary' : '' ) . '">' . esc_html( $label ) . '</button></form>';
+	};
+	echo '<div class="wrap"><h1>Yardhood</h1>';
+	if ( $msg ) {
+		echo '<div class="notice notice-info"><p>' . esc_html( $msg ) . '</p></div>';
+	}
+	echo '<h2>Launch</h2>';
+	if ( $locked ) {
+		echo '<p>The site is <strong>private</strong>. Only signed-in members and people with the preview link can see it.</p>';
+		if ( $at ) {
+			echo '<p>It opens to the public automatically on <strong>' . esc_html( wp_date( 'l, F j \a\t g:i a T', $at, new DateTimeZone( 'America/New_York' ) ) ) . '</strong>. You do not need to do anything.</p>';
+			$form( 'open_now', 'Open it now instead' );
+			$form( 'cancel_auto', 'Cancel the automatic opening' );
+		} else {
+			$form( 'open_now', 'Open the site to the public', true );
+		}
+	} else {
+		echo '<p>The site is <strong>public</strong>.</p>';
+		$form( 'lock', 'Make it private again' );
+	}
+	echo '<h2>Stripe key</h2>';
+	echo '<p>Status: <strong>' . ( yh_billing_key() ? 'saved' : 'not saved yet' ) . '</strong></p>';
+	echo '<form method="post">';
+	wp_nonce_field( 'yh_owner' );
+	echo '<input type="hidden" name="yh_owner" value="key"><p><input type="password" name="yh_key" class="regular-text" autocomplete="off" placeholder="Paste the rk_live_ key here"></p><p><button class="button button-primary">Save key</button></p></form>';
+	echo '</div>';
+}
+
+add_action( 'admin_init', function () {
+	if ( ! get_option( 'yh_launch_at_set' ) ) {
+		update_option( 'yh_launch_at', 1795698000 );
+		update_option( 'yh_launch_at_set', 1 );
+	}
+} );

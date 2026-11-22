@@ -494,8 +494,3 @@ body.yardhood nav#subnav.bp-subnavs ul li.selected a,body.yardhood nav#subnav.bp
 .yh-leader-row{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;margin-bottom:56px;}
 .yh-leader-event{margin:8px 0 24px;}
 @media (max-width:1024px){.yh-leader-row{grid-template-columns:1fr;gap:24px;}}
-
-/* Logo mark: string-lights Y */
-body.yardhood .site-title a::before{content:"";display:inline-block;width:34px;height:34px;margin-right:10px;vertical-align:-6px;background:url(../../../plugins/yardhood-core/assets/img/yh-mark-cream.svg?v=130) center/contain no-repeat;}
-body.yardhood .site-title a{display:inline-flex;align-items:center;}
-@media (max-width:800px){body.yardhood .site-title a::before{width:28px;height:28px;margin-right:8px;}}
