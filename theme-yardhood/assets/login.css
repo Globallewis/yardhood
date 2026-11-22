@@ -13,3 +13,5 @@ body.login #nav,body.login #backtoblog{text-align:center;}
 body.login #nav a,body.login #backtoblog a,body.login a{color:#8E4B2F!important;}
 body.login .yh-login-tag{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#8E4B2F;margin:0 0 14px;}
 body.login .message,body.login .notice{border-left-color:#C79A3A!important;background:#F6EFE4!important;}
+
+body.login h1 a::before{content:"";display:block;width:64px;height:64px;margin:0 auto 10px;background:url(MARK_URL) center/contain no-repeat;}

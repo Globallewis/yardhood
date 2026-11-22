@@ -152,3 +152,27 @@ function yh_seed_posts() {
 	}
 	return $out ? $out : array( 'Starter posts already in place.' );
 }
+
+/* ---------- Site email: send as Yardhood <hello@yardhood.com> ---------- */
+function yh_mail_address() {
+	$e = get_option( 'yh_contact_email', 'hello@yardhood.com' );
+	return is_email( $e ) ? $e : 'hello@yardhood.com';
+}
+add_filter( 'wp_mail_from', function ( $from ) {
+	return ( 0 === strpos( $from, 'wordpress@' ) || '' === $from ) ? yh_mail_address() : $from;
+} );
+add_filter( 'wp_mail_from_name', function ( $name ) {
+	return ( 'WordPress' === $name || '' === $name ) ? 'Yardhood' : $name;
+} );
+add_action( 'phpmailer_init', function ( $m ) {
+	if ( empty( $m->Sender ) ) {
+		$m->Sender = yh_mail_address();
+	}
+} );
+add_action( 'admin_post_yh_mail_test', function () {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( 'No' );
+	}
+	$ok = wp_mail( yh_mail_address(), 'Yardhood test email', "This is a test from yardhood.com.\n\nIf you can read this, the site's email is working." );
+	wp_die( 'YH_MAIL ' . ( $ok ? 'sent' : 'failed' ) );
+} );

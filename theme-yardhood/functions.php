@@ -75,6 +75,8 @@ add_action( 'login_enqueue_scripts', function () {
 	wp_enqueue_style( 'yh-login-fonts', 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=DM+Sans:wght@400;500;700&display=swap', array(), null );
 	$css = file_get_contents( get_stylesheet_directory() . '/assets/login.css' );
 	$img = function_exists( 'yh_img' ) ? yh_img( 'movie-screen' ) : '';
+	$mark = defined( 'YH_URL' ) ? YH_URL . 'assets/img/yh-mark-plum.svg?v=' . YH_VERSION : '';
+	$css  = str_replace( 'MARK_URL', esc_url( $mark ), $css );
 	wp_add_inline_style( 'login', str_replace( 'IMG_URL', esc_url( $img ), $css ) );
 }, 50 );
 add_filter( 'login_headerurl', function () {
@@ -181,9 +183,11 @@ add_action( 'wp_head', function () {
 	if ( ! function_exists( 'yh_img' ) ) {
 		return;
 	}
-	$icon = yh_img( 'house' );
-	echo '<link rel="icon" href="' . esc_url( $icon ) . '" type="image/webp">' . "\n";
-	echo '<link rel="apple-touch-icon" href="' . esc_url( $icon ) . '">' . "\n";
+	$base = YH_URL . 'assets/img/';
+	$v    = '?v=' . YH_VERSION;
+	echo '<link rel="icon" href="' . esc_url( $base . 'yh-favicon.svg' . $v ) . '" type="image/svg+xml">' . "\n";
+	echo '<link rel="icon" href="' . esc_url( $base . 'yh-favicon-32.png' . $v ) . '" sizes="32x32" type="image/png">' . "\n";
+	echo '<link rel="apple-touch-icon" href="' . esc_url( $base . 'yh-icon-180.png' . $v ) . '">' . "\n";
 	$title = is_front_page() ? 'Yardhood | The Community Culture Magazine' : wp_get_document_title();
 	$desc  = 'Movie nights, real conversations, and people worth knowing. Join free.';
 	$img   = yh_img( 'cover' );
