@@ -212,3 +212,8 @@ add_filter( 'gettext', function ( $t ) {
 	}
 	return $t;
 }, 20 );
+
+/* WordPress toolbar: site admins only. Members never see it. */
+add_filter( 'show_admin_bar', function ( $show ) {
+	return $show && current_user_can( 'manage_options' );
+}, 99 );
