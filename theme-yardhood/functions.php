@@ -201,3 +201,14 @@ add_action( 'wp_head', function () {
 	}
 	printf( '<meta property="og:site_name" content="Yardhood"><meta property="og:title" content="%1$s"><meta property="og:description" content="%2$s"><meta property="og:image" content="%3$s"><meta property="og:url" content="%4$s"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="%2$s">' . "\n", esc_attr( $title ), esc_attr( $desc ), esc_url( $img ), esc_url( home_url( add_query_arg( array() ) ) ) );
 }, 3 );
+
+/* Signup confirmation wording */
+add_filter( 'gettext', function ( $t ) {
+	if ( false !== stripos( $t, 'almost there' ) ) {
+		return 'Check your email';
+	}
+	if ( 0 === strpos( $t, 'Before you can login, you need to confirm your email address' ) ) {
+		return 'One more step: open the email we just sent you and click the link to confirm. Then sign in. If you do not see it in a few minutes, check your spam folder.';
+	}
+	return $t;
+}, 20 );

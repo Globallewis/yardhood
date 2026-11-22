@@ -494,3 +494,9 @@ body.yardhood nav#subnav.bp-subnavs ul li.selected a,body.yardhood nav#subnav.bp
 .yh-leader-row{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;margin-bottom:56px;}
 .yh-leader-event{margin:8px 0 24px;}
 @media (max-width:1024px){.yh-leader-row{grid-template-columns:1fr;gap:24px;}}
+
+/* Signup and activation notices: readable text */
+body.yardhood #buddypress .bp-feedback,body.yardhood .bp-feedback{background:#FFF8EC!important;border:1px solid #E3C57A!important;border-radius:10px;box-shadow:none!important;}
+body.yardhood #buddypress .bp-feedback p,body.yardhood .bp-feedback p,body.yardhood .bp-feedback a{color:#3B1E35!important;font-size:17px;line-height:1.5;}
+body.yardhood .bp-feedback .bp-icon{background-color:#C79A3A!important;}
+body.yardhood.register #buddypress .register-page,body.yardhood.activation #buddypress{min-height:0!important;}
