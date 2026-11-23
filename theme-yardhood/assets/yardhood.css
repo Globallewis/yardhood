@@ -792,3 +792,25 @@ body.yardhood{--yh-teal:#4B3F78;}
 body.yardhood span.member-status{background:#4B3F78!important;}
 body.yardhood h1.entry-title.bb-profile-title{font-family:'Playfair Display',serif!important;font-style:italic!important;font-size:51.2px!important;line-height:1.1!important;}
 @media (max-width:767px){body.yardhood h1.entry-title.bb-profile-title{font-size:36px!important;}}
+
+/* Nov 23 late: one type system (Skye: "looks like six fonts"), profile polish, branded overflow */
+/* Only two fonts anywhere: DM Sans for text, Playfair Display for titles. Icons untouched. */
+body.yardhood,body.yardhood button,body.yardhood input,body.yardhood select,body.yardhood textarea,body.yardhood .bp-nouveau *:not([class*="bb-icon"]):not(i):not(h1):not(h2):not(h3):not(h4):not([class*="yh-"]):not(.entry-title){font-family:'DM Sans',sans-serif!important;}
+/* Every small uppercase label (kickers, chips, bylines) uses the same size and spacing */
+.yh-ahero-by,.yh-card-kick,.yh-coverline-plus,.yh-event-card dt,.yh-fc-by,.yh-fc-tag,.yh-footer-tag,.yh-front-kick,.yh-kicker,.yh-listing-day,.yh-listing-lane,.yh-more-head,.yh-name-tag small,.yh-next-k,.yh-plan-free,.yh-prompts-kick,.yh-rail-k,.yh-room-intro-k,.yh-tile-kick,.yh-top3-label,.yh-topic-index,.yh-y2-chip,.yh-y2-event-d,.yh-y2-kick,.yh-y2-space-k,.yh-y2-voice-l{font-family:'DM Sans',sans-serif!important;font-weight:700!important;font-size:11px!important;letter-spacing:.16em!important;text-transform:uppercase!important;}
+/* Every story or column title is Playfair 600 (some were DM Sans or Playfair 400) */
+body.yardhood .yh-y2-space-t,body.yardhood .yh-y2-voice-t,body.yardhood .yh-y2-sunday-t,body.yardhood .yh-y2-mag-t{font-family:'Playfair Display',serif!important;font-weight:600!important;font-style:normal!important;letter-spacing:0!important;line-height:1.25!important;}
+body.yardhood .yh-y2-voice-t{font-size:18px!important;}
+body.yardhood .yh-y2-sunday-t{font-size:20px!important;}
+/* Profile: Details and About headings sized as section heads, not page titles */
+body.yardhood .profile-loop-header h1.entry-title.bb-profile-title{font-size:26px!important;font-style:normal!important;font-weight:600!important;}
+body.yardhood .profile-loop-header{border-bottom:1px solid #E0D2BE!important;padding-bottom:12px!important;margin-bottom:8px!important;}
+body.yardhood .profile-fields td.label,body.yardhood .profile-fields .label{color:#5E4A3F!important;font-size:12px!important;font-weight:700!important;letter-spacing:.08em!important;text-transform:uppercase!important;width:34%!important;}
+body.yardhood .profile-fields td.data{color:#3B1E35!important;font-size:15px!important;}
+body.yardhood .profile-fields tr td{padding:12px 0!important;border-bottom:1px solid #F1E4CF!important;}
+/* Default profile cover: a Yardhood photo under plum, instead of a flat pattern */
+body.yardhood #header-cover-image.has-default{background:linear-gradient(rgba(59,30,53,.55),rgba(59,30,53,.75)),url('/wp-content/plugins/yardhood-core/assets/img/hood-street.webp') center 45%/cover no-repeat!important;}
+/* Overflow (three dots) menu, if it shows on narrower screens: branded */
+body.yardhood .primary-menu .hideshow .sub-menu,body.yardhood #primary-navbar .sub-menu{background:#FFFBF4!important;border:1px solid #E0D2BE!important;border-radius:10px!important;box-shadow:0 10px 30px rgba(59,30,53,.15)!important;}
+body.yardhood .primary-menu .hideshow .sub-menu a,body.yardhood #primary-navbar .sub-menu a{font-family:'DM Sans',sans-serif!important;color:#3B1E35!important;font-weight:600!important;}
+body.yardhood .primary-menu .hideshow .sub-menu a:hover,body.yardhood #primary-navbar .sub-menu a:hover{background:#F1E4CF!important;}

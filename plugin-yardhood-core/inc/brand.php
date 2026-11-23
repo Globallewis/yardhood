@@ -129,7 +129,7 @@ function yh_seed_posts() {
 		'sunday-dinner'         => "Welcome to Sunday Dinner. Show us your plate.\n\nPost a photo of what is on your table, the recipe if you want to share it, and the story behind it. Who taught you? Who always asks for seconds?",
 		'artist-corner'         => "Welcome to Artist Corner. Share what you are working on, ask for feedback, and cheer each other on.\n\nEvery month we look here for the next cover artist. Post a piece in progress and tell us what it is about.",
 		'people-worth-knowing'  => "Welcome to People Worth Knowing. This is the home of our features: artists, business owners and neighbors on how they got here.\n\nKnow someone whose story should be told? Tag them here, or send your own at yardhood.com/submit-your-story.",
-		'life-skills'           => "Welcome to Life Skills. Everyday skills for grown folks, at your own pace: money, home, cooking, career moves and the stuff nobody sat us down to explain.\n\nWhat is one thing you wish someone had taught you earlier?",
+		'life-skills'           => "Welcome to Real Skills For Life. Everyday skills for grown folks, at your own pace: money, home, cooking, career moves and the stuff nobody sat us down to explain.\n\nWhat is one thing you wish someone had taught you earlier?",
 	);
 	$uid = get_current_user_id();
 	foreach ( $seeds as $slug => $text ) {

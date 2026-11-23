@@ -87,7 +87,7 @@ function yh_official_spaces() {
 		array( 'slug' => 'sunday-dinner', 'name' => 'Sunday Dinner', 'img' => 'plate', 'pos' => '50% 50%', 'kick' => 'Weekly', 'dek' => 'Show us your plate and the story behind it.', 'bg' => '#4A2C1D' ),
 		array( 'slug' => 'artist-corner', 'name' => 'Artist Corner', 'img' => 'artist-studio', 'pos' => '75% 35%', 'kick' => 'Create', 'dek' => 'Work in progress, feedback and the monthly cover pick.', 'bg' => '#7A5A1E' ),
 		array( 'slug' => 'people-worth-knowing', 'name' => 'People Worth Knowing', 'img' => 'hood-street', 'pos' => '88% 45%', 'kick' => 'Stories', 'dek' => 'Read the features. Submit your own.', 'bg' => '#4B3F78' ),
-		array( 'slug' => 'life-skills', 'name' => 'Life Skills', 'img' => 'library', 'pos' => '35% 50%', 'kick' => 'Learn', 'dek' => 'Everyday skills for grown folks, at your pace.', 'bg' => '#3B1E35' ),
+		array( 'slug' => 'life-skills', 'name' => 'Real Skills For Life', 'img' => 'library', 'pos' => '35% 50%', 'kick' => 'Learn', 'dek' => 'Got something to teach? Teach it. Want to learn? Pull up a seat.', 'bg' => '#3B1E35' ),
 	);
 }
 

@@ -177,7 +177,7 @@ function yh_copy_hosting() {
 <p class="yh-lede-dark">Yardhood has room for your people. Here is how hosting works, what each plan is for, and how to make a group people want to come back to.</p>
 
 <h3>How groups work here</h3>
-<p>Every member can join the official spaces in The Yard for free: Movie Nights, The Cookout, Sunday Dinner, Artist Corner, People Worth Knowing and Life Skills. Hosts start their own groups in The Hood. Your group gets its own page, discussion feed, photos, member list, and events in the Yard Guide when you run something live.</p>
+<p>Every member can join the official spaces in The Yard for free: Movie Nights, The Cookout, Sunday Dinner, Artist Corner, People Worth Knowing and Real Skills For Life. Hosts start their own groups in The Hood. Your group gets its own page, discussion feed, photos, member list, and events in the Yard Guide when you run something live.</p>
 
 <h3>The plans</h3>
 <p><strong>Community Host · \$10 a month, first month free.</strong> Start and run a free group for the people you organize: a book club, a city chapter, a crew of creatives, a support circle, a fan room. Members join free. You can cancel anytime.</p>
