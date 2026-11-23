@@ -506,3 +506,20 @@ body.yardhood .register-section-logo{margin:8px 0 6px;text-align:center;}
 body.yardhood .register-section-logo a{display:inline-flex;flex-direction:column;align-items:center;gap:8px;font-size:0!important;color:transparent!important;text-decoration:none;}
 body.yardhood .register-section-logo a::before{content:"";width:52px;height:52px;background:url(../../../plugins/yardhood-core/assets/img/yh-mark-plum.svg) center/contain no-repeat;}
 body.yardhood .register-section-logo a::after{content:"YARDHOOD";font-family:var(--yh-serif);font-size:30px;letter-spacing:.08em;color:#3B1E35;font-weight:700;}
+
+/* ===== Perspectives ===== */
+.yh-pillar-chips{flex-wrap:wrap;}
+.yh-persp-list{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;margin-top:20px;border-top:2px solid var(--yh-gold);}
+.yh-persp-item{display:flex;flex-direction:column;gap:6px;padding:24px 0;border-bottom:1px solid var(--yh-hair);color:var(--yh-ink)!important;text-decoration:none!important;}
+.yh-persp-item:hover .yh-persp-title{color:var(--yh-plum);text-decoration:underline;text-decoration-color:var(--yh-gold);}
+.yh-persp-title{font-family:var(--yh-serif);font-size:28px;font-weight:600;line-height:1.12;}
+.yh-persp-sub{font-family:var(--yh-serif);font-style:italic;font-size:18px;color:var(--yh-muted);line-height:1.35;}
+.yh-persp-head{max-width:860px;}
+.yh-persp-bio{margin-top:28px;padding-top:16px;border-top:1px solid var(--yh-hair);font-style:italic;color:var(--yh-muted);}
+.yh-persp-note{margin-top:12px;}
+.yh-prompts{background:var(--yh-surface);border-left:3px solid var(--yh-gold);border-radius:0;padding:14px 18px;margin:4px 0 8px;}
+.yh-prompts-kick{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yh-sienna);margin:0 0 6px;}
+.yh-prompts ul{margin:0 0 6px 18px;padding:0;}
+.yh-prompts li{margin:4px 0;font-family:var(--yh-serif);font-size:18px;line-height:1.35;}
+@media (max-width:800px){.yh-persp-list{grid-template-columns:1fr;}.yh-persp-title{font-size:24px;}}
+body.yardhood li>a[href="https://yardhood.com/perspectives/"]{--yh-ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020l4-1%2011-11-3-3L5%2016z%22/%3E%3Cpath%20d%3D%22M14%207l3%203%22/%3E%3Cpath%20d%3D%22M13%2020h7%22/%3E%3C/svg%3E");}

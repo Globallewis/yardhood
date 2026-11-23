@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'YH_VERSION', '1.3.2' );
+define( 'YH_VERSION', '1.4.0' );
 define( 'YH_DIR', plugin_dir_path( __FILE__ ) );
 define( 'YH_URL', plugin_dir_url( __FILE__ ) );
 
@@ -26,6 +26,7 @@ require_once YH_DIR . 'inc/widgets.php';
 require_once YH_DIR . 'inc/brand.php';
 require_once YH_DIR . 'inc/content.php';
 require_once YH_DIR . 'inc/setup.php';
+require_once YH_DIR . 'inc/perspectives.php';
 
 register_activation_hook( __FILE__, function () {
 	yh_register_events_cpt();
