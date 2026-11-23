@@ -217,3 +217,35 @@ add_filter( 'gettext', function ( $t ) {
 add_filter( 'show_admin_bar', function ( $show ) {
 	return $show && current_user_can( 'manage_options' );
 }, 99 );
+
+/* ---------- Your Yard: member home ---------- */
+add_filter( 'login_redirect', function ( $to, $requested, $user ) {
+	if ( ! ( $user instanceof WP_User ) || user_can( $user, 'manage_options' ) ) {
+		return $to;
+	}
+	$plain = array( '', admin_url(), admin_url( '/' ), home_url( '/' ), home_url() );
+	if ( in_array( $requested, $plain, true ) || false !== strpos( (string) $requested, '/wp-admin' ) ) {
+		$p = get_page_by_path( 'your-yard' );
+		return $p ? get_permalink( $p ) : $to;
+	}
+	return $to;
+}, 99, 3 );
+add_filter( 'wp_nav_menu_objects', function ( $items ) {
+	if ( ! is_user_logged_in() ) {
+		return $items;
+	}
+	$p = get_page_by_path( 'your-yard' );
+	if ( ! $p ) {
+		return $items;
+	}
+	foreach ( $items as $it ) {
+		if ( 'Cover' === $it->title && untrailingslashit( $it->url ) === untrailingslashit( home_url( '/' ) ) ) {
+			$it->title = 'Your Yard';
+			$it->url   = get_permalink( $p );
+			if ( is_page( $p->ID ) ) {
+				$it->classes[] = 'current-menu-item';
+			}
+		}
+	}
+	return $items;
+} );

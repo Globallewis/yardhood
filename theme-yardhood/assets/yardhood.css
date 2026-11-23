@@ -523,3 +523,24 @@ body.yardhood .register-section-logo a::after{content:"YARDHOOD";font-family:var
 .yh-prompts li{margin:4px 0;font-family:var(--yh-serif);font-size:18px;line-height:1.35;}
 @media (max-width:800px){.yh-persp-list{grid-template-columns:1fr;}.yh-persp-title{font-size:24px;}}
 body.yardhood li>a[href="https://yardhood.com/perspectives/"]{--yh-ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020l4-1%2011-11-3-3L5%2016z%22/%3E%3Cpath%20d%3D%22M14%207l3%203%22/%3E%3Cpath%20d%3D%22M13%2020h7%22/%3E%3C/svg%3E");}
+
+/* ===== Your Yard (member home) ===== */
+.yh-home-hero{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:end;}
+.yh-home-next{position:static!important;max-width:none!important;}
+.yh-home-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:12px;flex-wrap:wrap;}
+.yh-home-rooms{padding-top:0!important;}
+.yh-room-row{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+.yh-room{position:relative;display:block;aspect-ratio:3/4;border-radius:8px;overflow:hidden;background:var(--tile-bg);color:var(--yh-paper)!important;text-decoration:none!important;}
+.yh-room img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.8;transition:transform .5s ease;}
+.yh-room:hover img{transform:scale(1.05);}
+.yh-room::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,8,18,0) 35%,rgba(20,8,18,.85));}
+.yh-room-text{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;display:flex;flex-direction:column;gap:2px;}
+.yh-room-name{font-family:var(--yh-serif);font-size:20px;font-weight:600;line-height:1.1;}
+.yh-room-when{font-size:12px;color:var(--yh-gold-l);}
+.yh-home-prompt{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:center;}
+.yh-home-prompt img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;}
+.yh-home-feed{margin-top:24px;}
+@media (max-width:1024px){.yh-room-row{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:800px){.yh-home-hero,.yh-home-prompt{grid-template-columns:1fr;gap:20px;}.yh-room-row{grid-template-columns:1fr 1fr;}}
+body.yardhood li>a[href="https://yardhood.com/your-yard/"]{--yh-ico:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2011l8-6%208%206%22/%3E%3Cpath%20d%3D%22M6%2010v9h12v-9%22/%3E%3Cpath%20d%3D%22M10%2019v-5h4v5%22/%3E%3C/svg%3E");}
+@media (max-width:640px){body.yardhood .yh-home-next{display:flex!important;align-items:flex-start;text-align:left;}}

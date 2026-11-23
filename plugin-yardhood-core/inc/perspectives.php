@@ -330,3 +330,12 @@ add_action( 'transition_post_status', function ( $new, $old, $post ) {
 		wp_mail( $u->user_email, 'Your Perspective is live on Yardhood', "Your piece \"" . $post->post_title . "\" is published.\n\nRead it and share it: " . get_permalink( $post ) );
 	}
 }, 10, 3 );
+
+/* Member home page, once. */
+add_action( 'admin_init', function () {
+	if ( get_option( 'yh_your_yard_v1' ) || ! function_exists( 'yh_upsert_page' ) ) {
+		return;
+	}
+	yh_upsert_page( 'your-yard', 'Your Yard', 'page-templates/my-yard.php', '' );
+	update_option( 'yh_your_yard_v1', 1 );
+} );
