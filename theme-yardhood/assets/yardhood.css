@@ -785,3 +785,10 @@ body.yardhood #buddypress .field-visibility-settings-toggle .visibility-toggle-l
 body.yardhood .grid-filters .layout-view{color:#3B1E35!important;}
 body.yardhood .grid-filters .layout-view.active{background:#3B1E35!important;color:#F6EFE4!important;}
 body.yardhood .grid-filters .layout-view i,body.yardhood .grid-filters .layout-view i::before{color:inherit!important;}
+
+/* Approved Nov 23: gold menu pill readable, teal retired, page titles consistent */
+body.yardhood #primary-navbar .primary-menu>li.current-menu-item>a,body.yardhood #primary-navbar .primary-menu>li.current_page_item>a,body.yardhood #primary-navbar .primary-menu>li.current-menu-item>a *,body.yardhood #primary-navbar .primary-menu>li.current_page_item>a *,body.yardhood .primary-menu>li.current-menu-item>a span,body.yardhood .primary-menu>li.current_page_item>a span{color:#3B1E35!important;}
+body.yardhood{--yh-teal:#4B3F78;}
+body.yardhood span.member-status{background:#4B3F78!important;}
+body.yardhood h1.entry-title.bb-profile-title{font-family:'Playfair Display',serif!important;font-style:italic!important;font-size:51.2px!important;line-height:1.1!important;}
+@media (max-width:767px){body.yardhood h1.entry-title.bb-profile-title{font-size:36px!important;}}

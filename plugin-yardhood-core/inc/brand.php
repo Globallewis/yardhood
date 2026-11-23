@@ -52,7 +52,7 @@ function yh_apply_theme_colors() {
 		'tooltip_background'             => $plum,
 		'tooltip_color'                  => $paper,
 		'default_notice_bg_color'        => $plum,
-		'success_notice_bg_color'        => '#0F4C5C',
+		'success_notice_bg_color'        => '#4B3F78',
 		'warning_notice_bg_color'        => '#C79A3A',
 		'error_notice_bg_color'          => '#8E4B2F',
 		'button_default_radius'          => 8,
