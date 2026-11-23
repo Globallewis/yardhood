@@ -21,7 +21,7 @@ $next    = $mine ? $mine[0] : ( $events ? $events[0] : null );
 $spaces  = function_exists( 'yh_official_spaces' ) ? yh_official_spaces() : array();
 $prompts = array(
 	array( 'Sunday Dinner', 'Show us your plate', 'Post a photo of what you cooked or ordered this week, and the story behind it.', yh_space_url( 'sunday-dinner' ), 'Share your plate', 'plate' ),
-	array( 'Perspectives', 'Make your case', 'Pick one of the 12 Pillars and write what you see. An editor reads every piece.', yh_page_url( 'write-a-perspective' ), 'Write a perspective', 'library' ),
+	array( 'Perspectives', 'Make your case', 'Pick a topic and write what you see. An editor reads every piece.', yh_page_url( 'write-a-perspective' ), 'Write a perspective', 'library' ),
 	array( 'Stories', 'Tell us how you got here', 'When did you realize what you were meant to do with your life? Start there.', yh_page_url( 'submit-your-story' ), 'Submit your story', 'artist-studio' ),
 );
 $feature = $prompts[ (int) gmdate( 'W' ) % count( $prompts ) ];
@@ -33,7 +33,7 @@ $reads   = get_posts( array( 'post_type' => array( 'yh_story', 'yh_perspective' 
 			<div>
 				<?php echo yh_t_kicker( 'Your Yard' ); // phpcs:ignore ?>
 				<h1 class="yh-h1">Welcome back, <span class="yh-gold-text"><?php echo esc_html( $first ); ?></span></h1>
-				<p class="yh-sub">Here is what is happening this week. Cameras are always optional. You can come in and just listen.</p>
+				<p class="yh-sub">Here is what is on in the Yard this week.</p>
 			</div>
 			<?php if ( $next ) : $ns = yh_event_start( $next->ID ); ?>
 				<a class="yh-next yh-home-next" href="<?php echo esc_url( get_permalink( $next ) ); ?>" data-start="<?php echo esc_attr( $ns ? $ns->getTimestamp() : 0 ); ?>">

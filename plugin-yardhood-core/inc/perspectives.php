@@ -47,12 +47,12 @@ add_action( 'init', function () {
 		'show_in_rest'  => true,
 	) );
 	register_taxonomy( 'yh_pillar', array( 'yh_perspective', 'yh_story' ), array(
-		'labels'            => array( 'name' => 'Pillars', 'singular_name' => 'Pillar', 'edit_item' => 'Edit pillar' ),
+		'labels'            => array( 'name' => 'Topics', 'singular_name' => 'Topic', 'edit_item' => 'Edit topic' ),
 		'hierarchical'      => true,
 		'public'            => true,
 		'show_in_rest'      => true,
 		'show_admin_column' => true,
-		'rewrite'           => array( 'slug' => 'pillar', 'with_front' => false ),
+		'rewrite'           => array( 'slug' => 'topic', 'with_front' => false ),
 	) );
 }, 11 );
 
@@ -147,6 +147,7 @@ function yh_perspective_metabox( $post ) {
 	echo '<p><label><strong>Subtitle</strong> (the line under the headline)<br><input type="text" name="_yh_subtitle" value="' . esc_attr( $sub ) . '" style="width:100%"></label></p>';
 	echo '<p><label><strong>Byline</strong> (name shown on the essay)<br><input type="text" name="_yh_byline" value="' . esc_attr( $by ) . '" style="width:100%"></label></p>';
 	echo '<p><label><input type="checkbox" name="_yh_columnist" value="1" ' . checked( $col, '1', false ) . '> This is a Yardhood columnist (pen name). Shows a "Yardhood Columnist" label instead of "Member".</label></p>';
+	echo '<p><label><strong>Label override</strong> (optional, e.g. Editor\'s Letter)<br><input type="text" name="_yh_label" value="' . esc_attr( get_post_meta( $post->ID, '_yh_label', true ) ) . '" style="width:100%"></label></p>';
 	echo '<p><label><strong>Short bio</strong> (shown at the end)<br><textarea name="_yh_bio" rows="3" style="width:100%">' . esc_textarea( $bio ) . '</textarea></label></p>';
 	$sub_raw = get_post_meta( $post->ID, '_yh_submission', true );
 	if ( $sub_raw ) {
@@ -162,6 +163,7 @@ add_action( 'save_post_yh_perspective', function ( $post_id ) {
 	update_post_meta( $post_id, '_yh_byline', sanitize_text_field( wp_unslash( $_POST['_yh_byline'] ?? '' ) ) );
 	update_post_meta( $post_id, '_yh_columnist', empty( $_POST['_yh_columnist'] ) ? '0' : '1' );
 	update_post_meta( $post_id, '_yh_bio', sanitize_textarea_field( wp_unslash( $_POST['_yh_bio'] ?? '' ) ) );
+	update_post_meta( $post_id, '_yh_label', sanitize_text_field( wp_unslash( $_POST['_yh_label'] ?? '' ) ) );
 } );
 
 /* Pending count on the admin menu so new essays are easy to spot. */
@@ -187,6 +189,10 @@ function yh_perspective_byline( $id ) {
 }
 
 function yh_perspective_label( $id ) {
+	$custom = get_post_meta( $id, '_yh_label', true );
+	if ( $custom ) {
+		return $custom;
+	}
 	return '1' === get_post_meta( $id, '_yh_columnist', true ) ? 'Yardhood Columnist' : 'Member Perspective';
 }
 
@@ -213,7 +219,7 @@ add_shortcode( 'yardhood_perspective_form', function () {
 		<div class="yh-hp" aria-hidden="true"><label>Leave this empty <input type="text" name="yh_website" tabindex="-1" autocomplete="off"></label></div>
 		<fieldset>
 			<legend>Your topic</legend>
-			<label>Pillar
+			<label>Topic
 				<select name="pillar" id="yh-pillar" required>
 					<option value="" data-prompts="<?php echo esc_attr( yh_default_prompts() ); ?>">Choose one</option>
 					<?php foreach ( $terms as $t ) : ?>
@@ -287,7 +293,7 @@ function yh_handle_perspective() {
 	$by     = sanitize_text_field( $p['byline'] ?? '' );
 	$pillar = sanitize_key( $p['pillar'] ?? '' );
 	if ( ! $title || ! $sub || ! $by || ! term_exists( $pillar, 'yh_pillar' ) ) {
-		$fail( 'Please add a title, a subtitle, a byline and a pillar.' );
+		$fail( 'Please add a title, a subtitle, a byline and a topic.' );
 	}
 	if ( strlen( $body ) < 300 ) {
 		$fail( 'Please write a little more. About 300 words or more works best.' );
@@ -339,3 +345,12 @@ add_action( 'admin_init', function () {
 	yh_upsert_page( 'your-yard', 'Your Yard', 'page-templates/my-yard.php', '' );
 	update_option( 'yh_your_yard_v1', 1 );
 } );
+
+/* Topics moved from /pillar/ to /topic/: refresh links once. */
+add_action( 'init', function () {
+	if ( get_option( 'yh_topics_v1' ) ) {
+		return;
+	}
+	flush_rewrite_rules();
+	update_option( 'yh_topics_v1', 1 );
+}, 99 );

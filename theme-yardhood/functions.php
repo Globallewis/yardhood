@@ -21,7 +21,7 @@ add_filter( 'body_class', function ( $c ) {
 	if ( is_front_page() ) {
 		$c[] = 'yh-cover-page';
 	}
-	if ( is_page_template() || is_post_type_archive( array( 'yh_event', 'yh_story' ) ) || is_singular( array( 'yh_event', 'yh_story' ) ) || is_front_page() ) {
+	if ( is_page_template() || is_post_type_archive( array( 'yh_event', 'yh_story', 'yh_perspective' ) ) || is_singular( array( 'yh_event', 'yh_story', 'yh_perspective' ) ) || is_tax( array( 'yh_story_type', 'yh_series', 'yh_pillar' ) ) || is_front_page() ) {
 		$c[] = 'yh-magazine';
 	}
 	return $c;

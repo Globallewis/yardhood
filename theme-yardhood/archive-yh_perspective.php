@@ -1,7 +1,7 @@
 <?php
 /**
  * Perspectives: member essays and columnists, browsable by pillar.
- * Also used for pillar pages (essays and stories together).
+ * Also used for topic pages (essays and stories together).
  */
 get_header();
 $term    = get_queried_object();
@@ -12,7 +12,7 @@ $write   = yh_page_url( 'write-a-perspective' );
 <div class="yh-wrap-full">
 	<section class="yh-section yh-cream yh-page-top">
 		<div class="yh-container">
-			<?php echo yh_t_kicker( $on_tax ? 'The 12 Pillars' : 'Member essays and columns' ); // phpcs:ignore ?>
+			<?php echo yh_t_kicker( $on_tax ? 'Perspectives' : 'Member essays and columns' ); // phpcs:ignore ?>
 			<?php if ( $on_tax ) : ?>
 				<h1 class="yh-h1"><?php echo esc_html( $term->name ); ?></h1>
 				<p class="yh-sub">Perspectives and stories on <?php echo esc_html( strtolower( $term->name ) ); ?>, from people who live it.</p>
@@ -21,7 +21,7 @@ $write   = yh_page_url( 'write-a-perspective' );
 				<p class="yh-sub">Members make their case on the things that shape a life. Different voices, one table.</p>
 			<?php endif; ?>
 			<?php if ( $pillars ) : ?>
-				<nav class="yh-chips yh-chips-dark yh-pillar-chips" aria-label="Pillars">
+				<nav class="yh-chips yh-chips-dark yh-pillar-chips" aria-label="Topics">
 					<a class="yh-chip<?php echo $on_tax ? '' : ' is-on'; ?>" href="<?php echo esc_url( get_post_type_archive_link( 'yh_perspective' ) ); ?>">All</a>
 					<?php foreach ( $pillars as $t ) : ?>
 						<a class="yh-chip<?php echo ( $on_tax && $term->term_id === $t->term_id ) ? ' is-on' : ''; ?>" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo esc_html( $t->name ); ?></a>
@@ -52,7 +52,7 @@ $write   = yh_page_url( 'write-a-perspective' );
 				<?php the_posts_pagination(); ?>
 			<?php else : ?>
 				<div class="yh-empty-block yh-empty-cream">
-					<p class="yh-empty"><?php echo $on_tax ? 'Nobody has written on this pillar yet. It could be you.' : 'The first Perspectives are being written now.'; ?></p>
+					<p class="yh-empty"><?php echo $on_tax ? 'Nobody has written on this topic yet. It could be you.' : 'The first Perspectives are being written now.'; ?></p>
 					<a class="yh-btn yh-btn-plum" href="<?php echo esc_url( $on_tax ? add_query_arg( 'pillar', $term->slug, $write ) : $write ); ?>">Write a perspective</a>
 				</div>
 			<?php endif; ?>
@@ -62,7 +62,7 @@ $write   = yh_page_url( 'write-a-perspective' );
 		<div class="yh-container yh-split">
 			<div>
 				<h2 class="yh-h2">Got something to say?</h2>
-				<p>Pick a pillar, give it a headline, and make your case. An editor reads every piece.</p>
+				<p>Pick a topic, give it a headline, and make your case. An editor reads every piece.</p>
 			</div>
 			<a class="yh-btn yh-btn-gold" href="<?php echo esc_url( $on_tax ? add_query_arg( 'pillar', $term->slug, $write ) : $write ); ?>">Write a perspective</a>
 		</div>
