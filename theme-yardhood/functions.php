@@ -35,6 +35,7 @@ if ( ! function_exists( 'yh_img' ) ) {
 }
 
 require_once get_stylesheet_directory() . '/parts/film-leader.php';
+require_once get_stylesheet_directory() . '/parts/feature.php';
 
 /** Small helpers for templates. */
 function yh_t_kicker( $text ) {
@@ -162,7 +163,7 @@ add_action( 'wp_footer', function () {
 	?>
 	<script>
 	(function(){
-		var sel='.yh-toc-item,.yh-door,.yh-listing,.yh-tile,.yh-banner,.yh-step,.yh-story-card,.yh-card,.yh-plan,.yh-section-head,.yh-editor-letter,.yh-contents li';
+		var sel='.yh-lead,.yh-fcard,.yh-toc-item,.yh-door,.yh-listing,.yh-tile,.yh-banner,.yh-step,.yh-story-card,.yh-card,.yh-plan,.yh-section-head,.yh-editor-letter,.yh-contents li';
 		var els=document.querySelectorAll(sel);
 		if(!('IntersectionObserver' in window)){return;}
 		var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});

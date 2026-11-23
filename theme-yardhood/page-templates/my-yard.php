@@ -109,15 +109,7 @@ $reads   = get_posts( array( 'post_type' => array( 'yh_story', 'yh_perspective' 
 				<a class="yh-link-strong" href="<?php echo esc_url( get_post_type_archive_link( 'yh_perspective' ) ); ?>">Perspectives</a>
 			</div>
 			<?php if ( $reads ) : ?>
-				<div class="yh-persp-list">
-					<?php foreach ( $reads as $r ) : $st = 'yh_story' === $r->post_type; ?>
-						<a class="yh-persp-item" href="<?php echo esc_url( get_permalink( $r ) ); ?>">
-							<span class="yh-card-kick"><?php echo esc_html( $st ? 'Story' : yh_perspective_label( $r->ID ) ); ?></span>
-							<span class="yh-persp-title"><?php echo esc_html( get_the_title( $r ) ); ?></span>
-							<?php $sub = $st ? get_post_meta( $r->ID, '_yh_dek', true ) : get_post_meta( $r->ID, '_yh_subtitle', true ); if ( $sub ) : ?><span class="yh-persp-sub"><?php echo esc_html( $sub ); ?></span><?php endif; ?>
-						</a>
-					<?php endforeach; ?>
-				</div>
+				<div class="yh-fcards"><?php foreach ( $reads as $r ) { echo yh_t_feature_card( $r ); } // phpcs:ignore ?></div>
 			<?php else : ?>
 				<p class="yh-empty">The first features and Perspectives are being written now. <a href="<?php echo esc_url( yh_page_url( 'write-a-perspective' ) ); ?>">Write one</a>.</p>
 			<?php endif; ?>
