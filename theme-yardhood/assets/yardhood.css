@@ -637,7 +637,7 @@ body.yardhood .yh-cream .yh-chip.is-on{background:var(--yh-gold)!important;borde
 @media (max-width:800px){.yh-ahero{min-height:70vh;}.yh-ahero-text{padding-bottom:36px;}.yh-react{flex-direction:row;flex-wrap:wrap;}.yh-react-b{width:auto;gap:8px;}}
 
 /* ===== Your Yard v2: "The Lights Are On" (Nov 23 visual direction) ===== */
-.yh-yard2{--y2-night:#1B1622;--y2-cocoa:#4A2C1D;--y2-espresso:#2A1A14;--y2-cream:#F6EFE4;--y2-bone:#EFE4D2;--y2-gold:#C79A3A;--y2-ink:#2A1A14;background:var(--y2-night);color:var(--y2-ink);padding-bottom:56px;}
+.yh-yard2{--y2-night:#1B1622;--y2-cocoa:#4A2C1D;--y2-espresso:#4A2C1D;--y2-cream:#F6EFE4;--y2-bone:#EFE4D2;--y2-gold:#C79A3A;--y2-ink:#3B1E35;background:var(--y2-night);color:var(--y2-ink);padding-bottom:56px;}
 .yh-y2-hero{position:relative;min-height:440px;display:flex;align-items:center;overflow:hidden;}
 .yh-y2-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;animation:yhKB 20s ease-out both;}
 .yh-y2-hero-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(27,22,34,.92) 0%,rgba(27,22,34,.7) 38%,rgba(27,22,34,.15) 75%),linear-gradient(0deg,rgba(27,22,34,.85),rgba(27,22,34,0) 35%);}
@@ -685,7 +685,7 @@ body.yardhood .yh-cream .yh-chip.is-on{background:var(--yh-gold)!important;borde
 .yh-y2-voice-n{font-family:var(--yh-serif);font-size:20px;font-weight:600;}
 .yh-y2-voice-t{font-size:15px;line-height:1.35;}
 .yh-y2-voice-l{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yh-sienna);}
-.yh-y2-sunday{display:flex;flex-direction:column;gap:8px;background:#3B4A2E;color:var(--y2-cream)!important;text-decoration:none!important;border-radius:14px;padding:22px;}
+.yh-y2-sunday{display:flex;flex-direction:column;gap:8px;background:#4B3F78;color:var(--y2-cream)!important;text-decoration:none!important;border-radius:14px;padding:22px;}
 .yh-y2-sunday-k{display:flex;gap:8px;align-items:center;font-family:var(--yh-serif);font-size:22px;font-weight:600;}
 .yh-y2-sunday-t{background:var(--y2-cream);color:var(--y2-ink);border-radius:10px 10px 0 0;padding:14px 16px 0;font-weight:700;font-size:17px;margin-top:6px;}
 .yh-y2-sunday-p{background:var(--y2-cream);color:#4d3b31;padding:4px 16px 14px;border-radius:0 0 10px 10px;font-size:15px;line-height:1.5;margin-top:-8px;}
@@ -735,3 +735,38 @@ body.yardhood .yh-cream .yh-chip.is-on{background:var(--yh-gold)!important;borde
 	.yh-y2-grid>*,.yh-y2-grid .yh-y2-sec{width:100%;box-sizing:border-box;}
 }
 body.yardhood.page-template-my-yard .site-footer-wrap,body.yardhood.page-template-page-templates-my-yard-php #content{background:#1B1622;}
+
+
+/* ===== QA Nov 23: header dropdowns, overflow menu, profile + room interiors ===== */
+/* Dropdown menus sit on cream, so their text must be dark (was cream on cream). */
+body.yardhood .site-header .sub-menu,body.yardhood .site-header .header-aside .sub-menu,body.yardhood .site-header .hideshow .sub-menu,body.yardhood .site-header .notification-dropdown,body.yardhood .site-header .header-cart-dropdown{background:#FFFBF4!important;border:1px solid var(--yh-hair)!important;box-shadow:0 14px 34px rgba(27,22,34,.22)!important;}
+body.yardhood .site-header .sub-menu a,body.yardhood .site-header .sub-menu a span,body.yardhood .site-header .sub-menu .ab-item,body.yardhood .site-header .sub-menu i,body.yardhood .site-header .sub-menu .user-mention,body.yardhood .site-header .sub-menu .user-name{color:#3B1E35!important;}
+body.yardhood .site-header .sub-menu a:hover,body.yardhood .site-header .sub-menu a:focus-visible,body.yardhood .site-header .sub-menu li.current-menu-item>a{background:#F1E4CF!important;color:#3B1E35!important;}
+body.yardhood .site-header .sub-menu a:focus-visible{outline:2px solid var(--yh-gold);outline-offset:-2px;}
+body.yardhood .site-header .sub-menu .user-mention{color:#7A6372!important;}
+body.yardhood .site-header .sub-menu li.logout-link a,body.yardhood .site-header .sub-menu a[href*="logout"]{color:#8E4B2F!important;font-weight:600;}
+body.yardhood .site-header .sub-menu .count,body.yardhood .site-header .sub-menu .bb-icon-angle-right{color:#3B1E35!important;}
+/* Overflow "more" menu items */
+body.yardhood #primary-navbar .hideshow .sub-menu a,body.yardhood .primary-menu .hideshow .sub-menu a{color:#3B1E35!important;font-weight:600;}
+
+/* Profile and room tabs: one Yardhood style */
+body.yardhood .bp-navs ul li a,body.yardhood #object-nav ul li a,body.yardhood .item-list-tabs ul li a{font-family:var(--yh-sans)!important;font-weight:600!important;letter-spacing:.02em;color:#5E4A3F!important;}
+body.yardhood .bp-navs ul li.selected a,body.yardhood .bp-navs ul li.current a,body.yardhood #object-nav ul li.selected a{color:#3B1E35!important;box-shadow:inset 0 -2px 0 var(--yh-gold)!important;}
+body.yardhood .bp-navs ul li a:hover{color:#3B1E35!important;}
+body.yardhood #item-header-content .bb-user-content-wrap h2,body.yardhood #item-header-content h2,body.yardhood .group-heading h2,body.yardhood .bp-profile-wrapper h2,body.yardhood .group-separator-block h2,body.yardhood .bp-widget h2,body.yardhood .profile-loop-header .entry-title{font-family:var(--yh-serif)!important;color:#3B1E35;}
+body.yardhood .bp-profile-wrapper,body.yardhood .bp-widget,body.yardhood #profile-edit-form .editfield,body.yardhood .group-item-actions,body.yardhood .bb-profile-grid .bp-widget{background:#FFFBF4;border-color:var(--yh-hair)!important;}
+body.yardhood .bp-widget table td.label,body.yardhood .profile-fields .label,body.yardhood #profile-edit-form label{font-family:var(--yh-sans)!important;color:#5E4A3F!important;font-weight:600;}
+body.yardhood #profile-edit-form input[type=text],body.yardhood #profile-edit-form input[type=url],body.yardhood #profile-edit-form textarea,body.yardhood #profile-edit-form select{border:1px solid var(--yh-hair)!important;border-radius:8px!important;background:#fff!important;font-family:var(--yh-sans)!important;}
+body.yardhood #profile-edit-form input[type=submit],body.yardhood #profile-edit-form .button,body.yardhood .bp-profile-wrapper .button.edit,body.yardhood #buddypress .generic-button a,body.yardhood #buddypress .groups-meta .generic-button button{background:#3B1E35!important;color:#F6EFE4!important;border:0!important;border-radius:999px!important;font-family:var(--yh-sans)!important;font-weight:700!important;}
+body.yardhood #profile-edit-form input[type=submit]:hover{background:#C79A3A!important;color:#3B1E35!important;}
+
+/* Room intro above the feed */
+.yh-room-intro{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch;margin:0 0 18px;}
+.yh-room-intro-main{flex:1 1 320px;background:#FFFBF4;border:1px solid var(--yh-hair);border-left:3px solid var(--yh-gold);border-radius:0 12px 12px 0;padding:14px 18px;}
+.yh-room-intro-k{display:block;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#8E4B2F;margin-bottom:4px;}
+.yh-room-intro-p{font-family:var(--yh-serif);font-size:19px;line-height:1.35;color:#3B1E35;margin:0;}
+.yh-room-intro-next{flex:0 1 260px;display:flex;flex-direction:column;background:#4A2C1D;color:#F6EFE4!important;text-decoration:none!important;border-radius:12px;padding:14px 18px;}
+.yh-room-intro-next .yh-room-intro-k{color:#E3C57A;}
+.yh-room-intro-t{font-family:var(--yh-serif);font-size:19px;font-weight:600;}
+.yh-room-intro-d{font-size:13px;opacity:.85;margin-top:2px;}
+.yh-room-intro-join{flex-basis:100%;margin:0;font-size:14px;color:#5E4A3F;}

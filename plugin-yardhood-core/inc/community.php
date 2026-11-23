@@ -162,3 +162,48 @@ add_action( 'bp_screens', function () {
 		exit;
 	}
 }, 1 );
+
+/* Rooms open on the conversation (Feed), not the member list. */
+add_filter( 'bp_groups_default_extension', function () {
+	return 'activity';
+}, 99 );
+
+/* Room intro above the feed: what this room is for, the next gathering, how to take part. Real data only. */
+function yh_room_intro() {
+	static $done = false;
+	if ( $done || ! function_exists( 'bp_is_group' ) || ! bp_is_group() ) {
+		return;
+	}
+	$done  = true;
+	$group = groups_get_current_group();
+	if ( ! $group ) {
+		return;
+	}
+	$space = null;
+	foreach ( yh_official_spaces() as $sp ) {
+		if ( $sp['slug'] === $group->slug ) {
+			$space = $sp;
+		}
+	}
+	$purpose = $space ? $space['dek'] : wp_trim_words( wp_strip_all_tags( $group->description ), 30, '…' );
+	$next    = null;
+	foreach ( yh_upcoming_events( 12 ) as $e ) {
+		if ( (int) get_post_meta( $e->ID, '_yh_group', true ) === (int) $group->id ) {
+			$next = $e;
+			break;
+		}
+	}
+	$member = is_user_logged_in() && groups_is_user_member( get_current_user_id(), $group->id );
+	echo '<section class="yh-room-intro">';
+	echo '<div class="yh-room-intro-main"><span class="yh-room-intro-k">This room</span><p class="yh-room-intro-p">' . esc_html( $purpose ) . '</p></div>';
+	if ( $next ) {
+		$s = yh_event_start( $next->ID );
+		echo '<a class="yh-room-intro-next" href="' . esc_url( get_permalink( $next ) ) . '"><span class="yh-room-intro-k">Next here</span><span class="yh-room-intro-t">' . esc_html( get_the_title( $next ) ) . '</span><span class="yh-room-intro-d">' . esc_html( $s ? $s->format( 'D, M j · g:i a' ) . ' ET' : '' ) . '</span></a>';
+	}
+	if ( ! $member ) {
+		echo '<p class="yh-room-intro-join">Join the room to post and reply. Reading is open to everyone.</p>';
+	}
+	echo '</section>';
+}
+add_action( 'bp_before_group_activity_post_form', 'yh_room_intro', 5 );
+add_action( 'bp_before_group_activity_content', 'yh_room_intro', 5 );

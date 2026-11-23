@@ -38,8 +38,12 @@ class YH_Widget_Coming_Up extends YH_Widget_Base {
 			$events = array_slice( $events, 0, 4 );
 		}
 		$this->open( $args, 'Coming up' );
+		if ( ! $events && function_exists( 'bp_is_group' ) && bp_is_group() ) {
+			echo '<p class="yh-w-empty">No gatherings scheduled for this room yet. Elsewhere in the Yard:</p>';
+			$events = yh_upcoming_events( 3 );
+		}
 		if ( ! $events ) {
-			echo '<p class="yh-w-empty">Nothing on the guide yet. Check back soon.</p>';
+			echo '<p class="yh-w-empty">New gatherings are being added. Check back soon.</p>';
 		} else {
 			echo '<ul class="yh-w-events">';
 			foreach ( $events as $e ) {
