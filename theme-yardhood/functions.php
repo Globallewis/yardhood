@@ -36,6 +36,7 @@ if ( ! function_exists( 'yh_img' ) ) {
 
 require_once get_stylesheet_directory() . '/parts/film-leader.php';
 require_once get_stylesheet_directory() . '/parts/feature.php';
+require_once get_stylesheet_directory() . '/parts/article.php';
 
 /** Small helpers for templates. */
 function yh_t_kicker( $text ) {
